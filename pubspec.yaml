@@ -33,6 +33,9 @@ flutter:
 
   assets:
     - assets/images/barcode.svg
+    - assets/images/bg_image1.jpg
+    - assets/images/bg_image2.jpg
+    - assets/images/bg_image2.png
 #    - assets/image/logo1.webp
 #    - assets/image/biesse_start.png
 #    - assets/image/biesse_start1.png

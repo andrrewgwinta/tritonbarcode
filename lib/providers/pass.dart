@@ -10,6 +10,7 @@ import '../globals.dart' as global;
 import '../utilities.dart';
 
 class PassItem {
+  final String? barcode;
   final String? id;
   final String? num;
   final DateTime? date;
@@ -20,7 +21,8 @@ class PassItem {
   final String? listorder;
 
   PassItem(
-      {this.id,
+      {this.barcode,
+        this.id,
       this.num,
       this.date,
       this.worker,
@@ -29,8 +31,9 @@ class PassItem {
       this.car,
       this.listorder});
 
-  factory PassItem.fromJson(Map<String, dynamic> json) {
+  factory PassItem.fromJson(String bc, Map<String, dynamic> json) {
     return PassItem(
+      barcode: bc,
       id: json["id"].toString(),
       num: json["num"].toString(),
       date: (json["date"] != null)
@@ -64,7 +67,9 @@ class PassItem {
   }
 }
 
-class Pass with ChangeNotifier {
+class Pass extends ChangeNotifier {
+  List<PairString> items = [];
+
   PassItem value = PassItem(
       id: '',
       num: '',
@@ -76,6 +81,7 @@ class Pass with ChangeNotifier {
       listorder:'');
 
   final description = [
+    {"barcode": "штрих-код"},
     {"id": "регистрационный номер"},
     {"num": "номер пропуска"},
     {"date": "дата выдачи "},
@@ -86,7 +92,8 @@ class Pass with ChangeNotifier {
     {"listorder": "заказы в пропуске"},
   ];
 
-  Future<void> redemtionPass(String id) async {
+  Future<void> redemptionPass(String barcode) async {
+    final id = barcode.substring(3, 3 + int.parse(barcode.substring(2, 3)));
     final url = Uri.parse(
         '${API.prefixURL}do_pass_done.php?id=$id&token=${global.token}');
     //print(url);
@@ -99,7 +106,11 @@ class Pass with ChangeNotifier {
     }
   }
 
-  Future<void> loadInfo(String id) async {
+  @override
+  Future<void> loadInfo(String barcode) async {
+    //print(barcode);
+    String s;
+    final id = barcode.substring(3, 3 + int.parse(barcode.substring(2, 3)));
     final url = Uri.parse(
         '${API.prefixURL}get_pass_info.php?id=$id&token=${global.token}');
     //print(url);
@@ -109,34 +120,25 @@ class Pass with ChangeNotifier {
       );
       if (response.statusCode == 200) {
         final loadJson = json.decode(response.body)[0];
-        final _loadedInformation = PassItem.fromJson(loadJson);
+        final _loadedInformation = PassItem.fromJson(barcode, loadJson);
         value = _loadedInformation;
+
+        List<PairString> result = [];
+          for (var element in description) {
+            s = element.keys.toString();
+
+            result.add(PairString(
+              text1: element.values
+                  .toString()
+                  .substring(1, element.values.toString().length - 1),
+              text2: value[s.substring(1, s.length - 1)],
+            ));
+          }
+          items = result;
       }
     } catch (error) {
       rethrow;
     }
   }
 
-  List<PairString> get items {
-    List<PairString> result = [];
-    String s;
-
-    for (var element in description) {
-      s = element.keys.toString();
-
-      result.add(PairString(
-        text1: element.values
-            .toString()
-            .substring(1, element.values.toString().length - 1),
-        text2: value[s.substring(1, s.length - 1)],
-      ));
-
-      // print(element.values.toString().substring(1, element.values
-      //     .toString()
-      //     .length - 1));
-      // print('${value![s.substring(1, s.length - 1)]}');
-    }
-
-    return result;
-  }
 }

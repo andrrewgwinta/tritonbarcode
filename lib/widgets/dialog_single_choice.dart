@@ -29,7 +29,7 @@ class DialogSingleChoise extends StatelessWidget {
     final userList = Provider.of<Users>(context, listen:false).getUserList();
     return SimpleDialog(
       title: const Text('пользователи БД Тритон'),
-      backgroundColor : kDialogBackGround,
+      backgroundColor : const Color(0xFFB4C56C).withOpacity(0.5),
       shape: kShapeBorder,
       elevation: kDialogElevation,
       children: [

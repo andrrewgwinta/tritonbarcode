@@ -110,85 +110,88 @@ class _LogonWidgetState extends State<LogonWidget> {
     //print('in build logon  ${global.machineId} ${global.userId}');
     bool _emptyUser = (global.userName.trim() == '');
     return PageTemplate(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(
-            height: 40,
-          ),
-          Container(
-              width: double.infinity,
-              margin: const EdgeInsets.all(5),
-              child: const Text(
-                'пользователь',
-                style: TextStyle(color: kFieldLabelText),
-              )),
-          Row(
-            children: [
-              Expanded(
-                child: Container(
-                  height: 65,
-                  decoration: API.kBoxDecoration(),
-                  child: Center(
-                    child: Text(
-                      _emptyUser ? 'выберите пользователя...' : global.userName,
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: _emptyUser ? Colors.white : kFieldText),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(
+              height: 40,
+            ),
+            Container(
+                width: double.infinity,
+                margin: const EdgeInsets.all(5),
+                child: const Text(
+                  'пользователь',
+                  style: TextStyle(color: kFieldLabelText),
+                )),
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    height: 65,
+                    decoration: API.kBoxDecoration(),
+                    child: Center(
+                      child: Text(
+                        _emptyUser ? 'выберите пользователя...' : global.userName,
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: _emptyUser ? Colors.white : kFieldText),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              IconButton(
-                color: Colors.black,
-                onPressed: choiceUsersClick,
-                icon: const Icon(
-                  Icons.arrow_forward,
-                  size: 30,
-                  color: kFieldLabelText,
-                ),
-              )
-            ],
-          ),
-          //password field
-          const SizedBox(
-            height: 10,
-          ),
-          Container(
-              width: double.infinity,
-              margin: const EdgeInsets.all(5),
-              child: const Text(
-                'пароль',
-                style: TextStyle(color: kFieldLabelText),
-              )),
-          Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-            Expanded(
-              child: Container(
-                decoration: API.kBoxDecoration(),
-                height: 65,
-                child: TextField(
-                  keyboardType: TextInputType.visiblePassword,
-                  obscureText: true,
-                  controller: _controller,
-                  onChanged: (value) => passwordText = value,
-                  decoration: API.kInputDecoration(),
-                  style: const TextStyle(fontSize: 20, color: Colors.black),
-                ),
-              ),
+                IconButton(
+                  color: Colors.black,
+                  onPressed: choiceUsersClick,
+                  icon: const Icon(
+                    Icons.arrow_forward,
+                    size: 30,
+                    color: kFieldText,
+                  ),
+                )
+              ],
             ),
+            //password field
             const SizedBox(
-              width: 130,
+              height: 10,
             ),
-            _keyboardVisible
-                ? FloatingActionButton(
-                    elevation: 1,
-                    onPressed: doLogonClick,
-                    child: const Icon(Icons.forward,
-                        size: 20, color: Colors.white))
-                : const SizedBox(width: 20),
-          ]),
-        ],
+            Container(
+                width: double.infinity,
+                margin: const EdgeInsets.all(5),
+                child: const Text(
+                  'пароль',
+                  style: TextStyle(color: kFieldLabelText),
+                )),
+            Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+              Expanded(
+                child: Container(
+                  decoration: API.kBoxDecoration(),
+                  height: 65,
+                  child: TextField(
+                    keyboardType: TextInputType.visiblePassword,
+                    obscureText: true,
+                    controller: _controller,
+                    onChanged: (value) => passwordText = value,
+                    decoration: API.kInputDecoration(),
+                    style: const TextStyle(fontSize: 20, color: Colors.black),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                width: 130,
+              ),
+              _keyboardVisible
+                  ? FloatingActionButton(
+                      elevation: 1,
+                      onPressed: doLogonClick,
+                      child: const Icon(Icons.forward,
+                          size: 20, color: Colors.white))
+                  : const SizedBox(width: 20),
+            ]),
+          ],
+        ),
       ),
       btnCaption: 'продолжить',
       btnClick: doLogonClick,

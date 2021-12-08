@@ -13,9 +13,9 @@ const kDackGreenLight = Color.fromRGBO(174, 208, 110, 1);
 const kFieldBackGroud = Color(0xFFcfcfcf);
 const kDialogBackGround = Color(0xFFddddff);
 const kFieldBorder = Color(0xFF9999ff);
-const kFieldText = Color(0xFF3333ff);
+const kFieldText = Color(0xFF484f2b);
 //const kFieldLabelText = Color(0xFF8080ff);
-const kFieldLabelText = Color(0xFF0000ff);
+const kFieldLabelText =  Color(0xFF242716);
 const kIconColor = Color(0xFF0000b3);
 const kShapeBorder = RoundedRectangleBorder(
     side: BorderSide(color:Colors.blueGrey, width: 1),
@@ -23,7 +23,7 @@ const kShapeBorder = RoundedRectangleBorder(
 
 const kShapeBorderNoSide = RoundedRectangleBorder(
     //side: BorderSide(color:Colors.blueGrey, width: 1),
-    borderRadius: BorderRadius.all(Radius.circular(15.0)));
+    borderRadius: BorderRadius.all(Radius.circular(25.0)));
 
 const kDialogElevation = 24.0;
 
@@ -153,18 +153,18 @@ class API {
 
 class Palette {
   static const MaterialColor kDackColor = MaterialColor(
-    0xFF92c03e,
+    0xFFb4c56c,
     // 0% comes in here, this will be color picked if no shade is selected when defining a Color property which doesn’t require a swatch.
     <int, Color>{
-      50: Color(0xFF83ad38), //10%
-      100: Color(0xFF759a32), //20%
-      200: Color(0xFF92c03e), //30%
-      300: Color(0xFF66862b), //40%
-      400: Color(0xFF587325), //50%
-      500: Color(0xFF49601f), //60%
-      600: Color(0xFF3a4d19), //70%
-      700: Color(0xFF2c3a13), //80%
-      800: Color(0xFF0f1306), //90%
+      50: Color(0xFFa2b161), //10%
+      100: Color(0xFF909e56), //20%
+      200: Color(0xFF7e8a4c), //30%
+      300: Color(0xFF6c7641), //40%
+      400: Color(0xFF5a6336), //50%
+      500: Color(0xFF484f2b), //60%
+      600: Color(0xFF363b20), //70%
+      700: Color(0xFF242716), //80%
+      800: Color(0xFF12140b), //90%
       900: Color(0xFF000000), //100%
     },
   );
